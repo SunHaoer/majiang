@@ -3,7 +3,7 @@ package life.sunhao.utils;
 import life.sunhao.pojo.MajiangCard;
 import life.sunhao.service.MajiangService;
 
-import java.util.List;
+import java.util.*;
 
 /**
  * @Name: MajiangUtil
@@ -34,6 +34,32 @@ public class MajiangUtil {
             System.out.print(nowCard.getNameCn() + " ");
         }
         System.out.println();
+    }
+
+    /**
+     * 麻将牌中文名根据逗号分割, 转为麻将 list
+     * @return
+     */
+    public static List<MajiangCard> nameCnStrToCardList(String nameCnStr) {
+        List<MajiangCard> cardList = new ArrayList<>();
+        List<String> nameCnList = Arrays.asList(nameCnStr.split(","));
+        for (String nameCn : nameCnList) {
+            cardList.add(new MajiangCard(nameCn));
+        }
+        return cardList;
+    }
+
+    /**
+     * list 转 queue
+     * @param majiangCardList
+     * @return
+     */
+    public static Queue<MajiangCard> listToQueue(List<MajiangCard> majiangCardList) {
+        Queue<MajiangCard> result = new LinkedList<>();
+        for (MajiangCard card : majiangCardList) {
+            result.add(card);
+        }
+        return result;
     }
 
 }

@@ -3,6 +3,8 @@ package life.sunhao.pojo;
 import life.sunhao.constants.MajiangConstants;
 import life.sunhao.enums.MajiangTypeEnum;
 
+import java.util.Arrays;
+
 /**
  * @Name: MajiangItem 单张麻将牌
  * @Author: sunhao
@@ -13,28 +15,57 @@ public class MajiangCard {
     /**
      * 类型： 风，条，饼，万
      */
-    public MajiangTypeEnum type;
+    private MajiangTypeEnum type;
 
     /**
      * 数值
      */
-    public Integer value;
+    private Integer value;
 
     /**
      * 每个麻将对应的code
      */
-    public Integer code;
+    private Integer code;
 
     /**
      * 中文名
      */
-    public String nameCn;
+    private String nameCn;
 
     public MajiangCard(MajiangTypeEnum type, Integer value) {
         this.type = type;
         this.value = value;
         this.code = calculateCode(type, value);
         this.nameCn = calculateNameCn(type, value);
+    }
+
+    /**
+     * 根据中文名创建麻将牌
+     * @param nameCn
+     */
+    public MajiangCard(String nameCn) {
+        this.nameCn = nameCn;
+        // 获取麻将牌类型
+        String typeStr = nameCn.charAt(1) + "";
+        MajiangTypeEnum type = null;
+        if (MajiangTypeEnum.nameCnMap.containsKey(typeStr)) {
+            type = MajiangTypeEnum.nameCnMap.get(typeStr);
+        } else {
+            type = MajiangTypeEnum.FENG;
+        }
+        this.type = type;
+        // 处理牌面数值
+        String valueStr = nameCn.charAt(0) + "";
+        Integer value = -1;
+        // 处理风板
+        if (MajiangTypeEnum.FENG.equals(type)) {
+            value = Arrays.asList(MajiangConstants.FENG_ARR).indexOf(nameCn);
+        } else {
+            value = Integer.valueOf(valueStr);
+        }
+        this.value = value;
+        // code
+        this.code = calculateCode(type, value);
     }
 
     /**
