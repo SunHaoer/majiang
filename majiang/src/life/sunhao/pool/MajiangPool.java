@@ -1,8 +1,8 @@
 package life.sunhao.pool;
 
 import life.sunhao.pojo.MajiangCard;
-import life.sunhao.service.MajiangService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,24 +13,18 @@ import java.util.List;
 public class MajiangPool {
 
     /**
-     * 整副麻将牌
-     */
-    public static List<MajiangCard> initCardPool;
-
-    /**
      * 剩下的麻将牌
      */
-    public static List<MajiangCard> leftCardPool;
+    public static List<MajiangCard> leftCardList;
 
     /**
      * 手中的麻将牌
      */
-    public static List<MajiangCard> handCardPool;
+    public static List<MajiangCard> handCardList;
 
     static {
-        // 初始化整副麻将牌
-        initCardPool = MajiangService.createMajiangAll();
-        // 剩下的麻将牌还是完整的一副
-        leftCardPool = initCardPool;
+        leftCardList = new ArrayList<>();
+        handCardList = new ArrayList<>();
     }
+
 }

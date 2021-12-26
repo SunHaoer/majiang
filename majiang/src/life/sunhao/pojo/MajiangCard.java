@@ -3,9 +3,6 @@ package life.sunhao.pojo;
 import life.sunhao.constants.MajiangConstants;
 import life.sunhao.enums.MajiangTypeEnum;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * @Name: MajiangItem 单张麻将牌
  * @Author: sunhao
@@ -36,8 +33,8 @@ public class MajiangCard {
     public MajiangCard(MajiangTypeEnum type, Integer value) {
         this.type = type;
         this.value = value;
-        this.code = getCode(type, value);
-        this.nameCn = getNameCn(type, value);
+        this.code = calculateCode(type, value);
+        this.nameCn = calculateNameCn(type, value);
     }
 
     /**
@@ -46,7 +43,7 @@ public class MajiangCard {
      * @param value
      * @return
      */
-    private Integer getCode(MajiangTypeEnum type, Integer value) {
+    private Integer calculateCode(MajiangTypeEnum type, Integer value) {
         Integer code = -1;
         if (MajiangTypeEnum.FENG.equals(type)) {
             // 风板
@@ -70,7 +67,7 @@ public class MajiangCard {
      * 获取中文名
      * @return
      */
-    private String getNameCn(MajiangTypeEnum type, Integer value) {
+    private String calculateNameCn(MajiangTypeEnum type, Integer value) {
         String nameCn = "";
         if (MajiangTypeEnum.FENG.equals(type)) {
             // 风板特殊处理
@@ -82,6 +79,24 @@ public class MajiangCard {
             // 条，饼，万
             nameCn = value + type.getNameCn();
         }
+        return nameCn;
+    }
+
+
+
+    public MajiangTypeEnum getType() {
+        return type;
+    }
+
+    public Integer getValue() {
+        return value;
+    }
+
+    public Integer getCode() {
+        return code;
+    }
+
+    public String getNameCn() {
         return nameCn;
     }
 

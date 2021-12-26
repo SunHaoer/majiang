@@ -17,4 +17,9 @@ public class MajiangConstants {
      */
     final public static Integer ONE_TYPE_MAX = 4;
 
+    /**
+     * 非庄家初始摸牌数
+     */
+    final public static Integer HAND_CARD_NUM = 13;
+
 }
